@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            @(@Resources.Global.Hello+"  " + User.Identity.GetUserName() + "!")<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="dropdown-header">@Resources.Global.Manageyouraccount</li>
+            <li>@Html.ActionLink(@Resources.Global.Password, "Index", "ManageLoginUser", routeValues: null, htmlAttributes: new { title = "ManageLoginUser" })</li>
+            <li>@Html.ActionLink(@Resources.Global.Preferenceforpages, "Index", "ManagePreferenceUser")</li>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">@Html.Raw(@Resources.Global.ManageinAdminmode)</li>
+                        <li>@Html.ActionLink(@Resources.Global.Roles, "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink(@Resources.Global.Users, "Index", "UsersAdmin")</li>
+                      
+            }
+        </ul>
+    </li>
+
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">@Resources.Global.LogOff</a></li>
+            <li>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                @Html.AntiForgeryToken()
+                }
+            </li>
+}
+else
+{
+        <li>@Html.ActionLink(@Resources.Global.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+}

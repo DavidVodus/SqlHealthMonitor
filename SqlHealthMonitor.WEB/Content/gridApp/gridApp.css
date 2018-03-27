@@ -1,0 +1,160 @@
+﻿
+body {
+    min-height: 2000px;
+    padding-top: 70px;
+}
+/* header + data table */
+.k-grid > table {
+    table-layout: auto !important;
+}
+
+div .k-widget, .k-grid {
+    width: 100%;
+}
+  /*columns title text wrapping in kendo grid*/
+    .k-grid .k-grid-header .k-header .k-link {
+        height: auto;
+    }
+    .k-grid .k-grid-header .k-header {
+        white-space: normal;
+    }
+/* moonlight theme-color if filter is active */
+.k-grid-filter.k-state-active {
+    background-color: #f9b303;
+}
+/* border of table data TD */
+.k-grid td {
+    border-style: solid !important;
+    border-width: 0 0 0 1px !important;
+    border-width: thin !important;
+    border-color: #7a8288;
+}
+/* align columns to fit to screen when grid is on this mode */
+.k-grid.fitToScreen .k-grid-header .k-header {
+    float: Left !important;
+    white-space: normal !important
+}
+
+/* background col of items in table  */
+table[role=treegrid] {
+    background-color: #7a8288 !important;
+}
+
+/*content in kendo grid*/
+table[role=grid] .panel-heading {
+    padding: 0px 3px !important;
+    text-align: center;
+    font-size: 10px;
+}
+
+table[role=grid] .panel-body {
+    padding: 0px !important;
+    font-size: 10px;
+    color: #c8c8c8;
+}
+
+table[role=grid] .panel {
+    margin-bottom: 2px !important;
+    font-size: 9px;
+}
+
+/* specify the alternate background-color */
+table[role=grid] .k-alt {
+    background-color: rgba(183, 182, 178, 0.8);
+}
+
+table[role=grid] td:hover {
+    background-color: #f4af03;
+}
+
+
+/*kendo loading animation*/
+div.k-loading-mask {
+    position: relative;
+    height: 40px !important;
+    padding-bottom  : 5px;
+}
+.k-loading-image {
+    background-size: 40px 40px;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-repeat: repeat-x;
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+}
+span.k-loading-text {
+    text-indent: 0;
+}
+
+
+k-grid-toolbar .toolbar-element {
+    height: 32px
+}
+/* notifications */
+.k-notification-sucess.k-group {
+    background: rgba(238, 211, 105, 0.96) !important;
+    border-width:thin;
+    border-style: solid;
+    border-color: orange;
+    color: #1b2537;
+}
+
+.k-notification-error.k-group {
+    background: rgb(165, 40, 40) !important;
+    border-width: thin;
+    border-style: solid;
+    border-color: #ff0000;
+    color: rgb(255, 255, 255);
+    word-wrap: break-word;
+}
+
+/*style for grid filters kendoGrid*/
+.gridFiltersValuesTable {
+    table-layout: auto;
+    width: auto !important;
+    font-size: x-small;
+    margin: 4px !important;
+}
+    .gridFiltersValuesTable td,
+    .gridFiltersValuesTable th {
+        border-style: solid !important;
+        border-color: #d8d4d4 !important;
+        border-width:1px;
+     
+    }
+    .gridFiltersValuesTable  th {
+        background-color: #696d70;
+    }
+
+.k-header.k-grid-toolbar.k-grid-top {
+    border-bottom-width: medium;
+    border-bottom-style: solid;
+    border-bottom-color: #f4af03;
+}
+.toolbar-element {
+    box-sizing: border-box;
+    height: 29px;
+    margin: 5px !important;
+    white-space: nowrap;
+}
+tbody[role=rowgroup] > tr:first-child > td:first-child {
+    border-top: 2px solid !important;
+    border-top-color: #f4af03 !important;
+    }
+.dropdown-header {
+    color: #f9b303;
+}
+.timeSpanEditorItem {
+    float : left;
+}
+
+
+.k-list-container.k-popup div.itemsContainer span {
+    width: 30% !important;
+    display: inline-block;
+    word-wrap: break-word;
+    padding-right: 5px;
+  
+}
+/*gridsFilter_MultiSelect-list .k-animation-container {
+    left: 0px !important;
+}*/
+

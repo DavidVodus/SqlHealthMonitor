@@ -1,0 +1,75 @@
+﻿@using SqlHealthMonitor.BLL.Models.WebPages
+@using SqlHealthMonitor.BLL.Models.WebPages.Components
+@model SqlHealthMonitor.BLL.Models.WebPages.ManagePreferenceUserViewModel
+@if (Request.IsAuthenticated && User.Identity.Name == "Admin")
+{
+    <div class="panel panel-default">
+        <div id="managePreferenceUserDialog"></div>
+        <div class="panel-heading">Admin Panel</div>
+        <div class="panel-body">
+            <button type="button" id="createPages_but">@Resources.Global.CreatePagesinDatabase</button>
+        </div>
+    </div>
+}
+@(Html.Kendo().Grid<PageReviewViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+      columns.Bound(x => x.PageName);
+      columns.Bound(x => x.PageType);
+      columns.Template(@<text> </text>)
+                  .ClientTemplate("<a href="+@Url.Action("#= PageType#", Model.ControllerName)+"/#= ControllerName#/#= StartActionName#>"+@Resources.Global.Gotopagesettings+"</a>")
+                  .Title("Link");
+          columns.Command(command => command.Destroy()).Width(110);
+
+      })
+       .Editable(editable => editable.Mode(GridEditMode.InCell))
+      .Sortable()
+      .Pageable()
+      .Scrollable(s => s.Height("auto"))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(6)
+          .Model(model =>
+          {
+              model.Id(p => p.PageId);
+          })
+          .Read(read => read.Action("ReadPages", "ManagePreferenceUser"))
+          .Destroy(update => update.Action("DestroyPage", "ManagePreferenceUser"))
+      ))
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.managePreferenceUserIndex = new function () {
+            var mainGrid = new gridApp.KendoWrappedGrid("#grid", null, null, null);
+            mainGrid.bindPopupNotification(window.shared_Layout.popupNotification);
+          
+
+            var createPages = function createPages() {
+                var popupNotification = window.shared_Layout.popupNotification;
+                $.ajax({
+                    url: "@Url.Action("CreatePages", Model.ControllerName)",
+                    success: function (response) {
+                        if (response == "")
+                            popupNotification.show("@Resources.Global.Pagesarecreated", "sucess");
+                        else {
+                            var errorModel = JSON.parse(response);
+                            popupNotification.show("@Resources.Global.Pagesarenotcreated" + "<br>" + errorModel.Exception.Message, "error");
+                        }
+                    },
+                    error: function (e) {
+                        popupNotification.show("@Resources.Global.Pagesarenotcreated" + "Ajax error", "error");
+                    }
+                });
+            }
+           var kendoButton = new gridApp.KendoWrappedButton("#createPages_but");
+            var kendoDialog = new gridApp.KendoWrappedOkCancelDialog("#managePreferenceUserDialog", "",
+                "@Resources.Global.CreatePagesNotice", createPages);
+            kendoButton.setOnClick(this, kendoDialog.open);
+          }
+      })
+
+</script>

@@ -1,0 +1,34 @@
+﻿@model SqlHealthMonitor.BLL.Models.WebPages.AddDbServerViewModel
+
+
+@using (Html.BeginForm("AddDbServer", Model.ControllerName, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.ServerName, new { @class = "col-md-12" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ServerName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConnectionString, new { @class = "col-md-12" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ConnectionString, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-12" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value=@Resources.Global.Resetpassword class="btn btn-default" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

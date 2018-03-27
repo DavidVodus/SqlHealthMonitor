@@ -1,0 +1,41 @@
+﻿@model SqlHealthMonitor.BLL.Models.Identity.UserLogin.ApplicationRolePageViewModel
+@{
+    ViewBag.Title = @Resources.Global.Details;
+}
+<h2>@Resources.Global.Details</h2>
+<div>
+    <h4>Roles.</h4>
+    <hr />
+    <dl >
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles.SingleOrDefault().Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Roles.SingleOrDefault().Name)
+        </dd>
+    </dl>
+</div>
+<h4>@Resources.Global.Listofusersinthisrole</h4>
+@if (ViewBag.UserCount == 0)
+{
+    <hr />
+    <p>@Resources.Global.Nousersfoundinthisrole</p>
+}
+<table class="table">
+    @foreach (var item in ViewBag.Users)
+    {
+        <tr>
+            <td>
+                @item.UserName
+            </td>
+        </tr>
+    }
+</table>
+<div class="form-group">
+    <div style="display:inline-block;clear:both" class="btn btn-default">
+        @Html.ActionLink(@Resources.Global.Edit, "Edit", new { id = Model.Roles.FirstOrDefault().Id })
+        </div>
+    </div>
+        @Html.ActionLink(@Resources.Global.BackToList, "Index")
+
+

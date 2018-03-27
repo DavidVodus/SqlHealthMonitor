@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CachedResults" xml:space="preserve">
+    <value>Přehled dotazů do DB,které jsou v mezipaměti</value>
+  </data>
+  <data name="CancelrunningGridquery" xml:space="preserve">
+    <value>Přeruš vyhledávání </value>
+  </data>
+  <data name="CreateNewUser" xml:space="preserve">
+    <value>Vytvoř nového uživatele</value>
+  </data>
+  <data name="ExecFiltering" xml:space="preserve">
+    <value>Vyhledej</value>
+  </data>
+  <data name="ExporttoExcel" xml:space="preserve">
+    <value>Exportuj výsledky do Excelu</value>
+  </data>
+  <data name="Filters_Multiselect" xml:space="preserve">
+    <value>Aktivní Filtry pro tento grid</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Ahoj</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Přihlásit se</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Odhlásit se</value>
+  </data>
+  <data name="Manageyouraccount" xml:space="preserve">
+    <value>Správa mého účtu</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Heslo</value>
+  </data>
+  <data name="Preferenceforpages" xml:space="preserve">
+    <value>Nastavení pohledů</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="SavePreferences" xml:space="preserve">
+    <value>Ulož nastavení pro tento grid</value>
+  </data>
+  <data name="Selectcolumnstohide" xml:space="preserve">
+    <value>Zvol sloupce v gridu,které chceš schovat</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Nástroje</value>
+  </data>
+  <data name="Usealocalaccounttologin" xml:space="preserve">
+    <value>Použij místní účet pro přihlášení</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Uživatelé</value>
+  </data>
+  <data name="Views" xml:space="preserve">
+    <value>Pohledy</value>
+  </data>
+  <data name="AjaxRequestError" xml:space="preserve">
+    <value>Chyba při odesílání dat na server(Ajax).</value>
+  </data>
+  <data name="Anerrorhasoccurred" xml:space="preserve">
+    <value>Nastala chyba</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Zpátky na přehled</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="ConfirmOfDeleteRole" xml:space="preserve">
+    <value>Opravdu si přejete smazat tuto Roli?</value>
+  </data>
+  <data name="ConfirmOfDeleteRoleNotice" xml:space="preserve">
+    <value>Smazáním této role odeberete všechny uživatele z této role,uživatele nesmažete.</value>
+  </data>
+  <data name="ConfirmOfDeleteUser" xml:space="preserve">
+    <value>Opravdu smazat tohoto uživatele?</value>
+  </data>
+  <data name="Confirmpassword" xml:space="preserve">
+    <value>Potvrdte heslo</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Vytvořit</value>
+  </data>
+  <data name="Createanewaccount" xml:space="preserve">
+    <value>Vytvořte nový účet</value>
+  </data>
+  <data name="CreatePagesinDatabase" xml:space="preserve">
+    <value>Vytvořit data pro všechny webové stránky v DB</value>
+  </data>
+  <data name="CreatePagesNotice" xml:space="preserve">
+    <value>Tato akce způsobí přepsání Šablon webových stránek  a aktualizaci preferencí stránek uživatelů .Znamená to, že Šablony webových stránek budou přepsány výchozími hodnotami a smazané stránky obnoveny.Uživatelům zůstanou jejich preference stránek a případně budou přidány nové attributy na základě zdrojoveho kodu.Chcete akci provést?</value>
+  </data>
+  <data name="Currentpassword" xml:space="preserve">
+    <value>Původní heslo</value>
+  </data>
+  <data name="DateTimeDifferenceindays" xml:space="preserve">
+    <value>Automatické nastavení datumu Od(aktuální datum) -Do ve filtrech gridu v jednotkách: den</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaily</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Stáhnout</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="FileAction" xml:space="preserve">
+    <value>Akce se souborem</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>Jméno souboru</value>
+  </data>
+  <data name="Gotopagesettings" xml:space="preserve">
+    <value>Nastavit attributy stránky</value>
+  </data>
+  <data name="Invalidlogin" xml:space="preserve">
+    <value>Neúspěšný pokus o přihlášení</value>
+  </data>
+  <data name="Listofrolesforthisuser" xml:space="preserve">
+    <value>Seznam rolí tohoto uživatele.</value>
+  </data>
+  <data name="Listofusers" xml:space="preserve">
+    <value>Seznam uživatelů.</value>
+  </data>
+  <data name="Listofusersinthisrole" xml:space="preserve">
+    <value>Seznam uživatelů v této roli.</value>
+  </data>
+  <data name="ManageinAdminmode" xml:space="preserve">
+    <value>Správa ostatních uživatelů&lt;br&gt;
+Admin nastavení</value>
+  </data>
+  <data name="ManageLoginUser" xml:space="preserve">
+    <value>Spravuj tento účet</value>
+  </data>
+  <data name="Newpassword" xml:space="preserve">
+    <value>Nové heslo</value>
+  </data>
+  <data name="Norolesfoundforthisuser" xml:space="preserve">
+    <value>Žádné role pro tohoto uživatele nebyly nalezeny</value>
+  </data>
+  <data name="Nousersfoundinthisrole" xml:space="preserve">
+    <value>Žádný uživatel nepatří do této role.</value>
+  </data>
+  <data name="OnlyfileswithdifferentNamecanbeuploaded" xml:space="preserve">
+    <value>Soubor se musí jmenovat jinak,než soubor který je již v systému nahraný.</value>
+  </data>
+  <data name="Pagesarecreated" xml:space="preserve">
+    <value>Stránky vytvořeny</value>
+  </data>
+  <data name="Pagesarenotcreated" xml:space="preserve">
+    <value>Stránky nebyly vytvořeny</value>
+  </data>
+  <data name="PasswordsNotMatch" xml:space="preserve">
+    <value>Hesla se neshodují</value>
+  </data>
+  <data name="Percent" xml:space="preserve">
+    <value>Procent</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrovat se</value>
+  </data>
+  <data name="Rememberthisbrowser" xml:space="preserve">
+    <value>Pamatovat si přihlášení v tomto prohlížeči?</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Odstranit</value>
+  </data>
+  <data name="Resetpassword" xml:space="preserve">
+    <value>Změnit heslo</value>
+  </data>
+  <data name="ResetpasswordConfirmation" xml:space="preserve">
+    <value>Potvrzení o změně hesla</value>
+  </data>
+  <data name="ResetpasswordConfirmationMessage" xml:space="preserve">
+    <value>Vaše heslo bylo změněno, prosím přihlašte se kliknutím zde</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Jméno role</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="SelectUserRole" xml:space="preserve">
+    <value>Zvolit roli pro tohoto uživatele</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Spustit</value>
+  </data>
+  <data name="TaskAction" xml:space="preserve">
+    <value>Akce s úkolem</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Úkoly</value>
+  </data>
+  <data name="Uploadfilefortask" xml:space="preserve">
+    <value>Nahraj soubor určený ke zpracování</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Uživatel</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Uživatelské jméno</value>
+  </data>
+  <data name="Yourpasswordhasbeenchanged" xml:space="preserve">
+    <value>Heslo bylo změněno</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Dny</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Hodiny</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>Minuty</value>
+  </data>
+  <data name="AddNewWidget" xml:space="preserve">
+    <value>Přidej nový widget</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="WidgetsView" xml:space="preserve">
+    <value>Pohled na widgety</value>
+  </data>
+  <data name="AddDbServers" xml:space="preserve">
+    <value>Přidej databázové servery</value>
+  </data>
+  <data name="ConnectionString" xml:space="preserve">
+    <value>ConnectionString</value>
+  </data>
+  <data name="ServerName" xml:space="preserve">
+    <value>Jméno serveru</value>
+  </data>
+  <data name="RemoveDbServer" xml:space="preserve">
+    <value>Odeber Sql server</value>
+  </data>
+</root>

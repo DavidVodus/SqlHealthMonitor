@@ -1,0 +1,154 @@
+﻿@using SqlHealthMonitor.DAL.Models.WebPages
+@model SqlHealthMonitor.BLL.Models.WebPages.PageViewModelBase
+ @{
+     var culture = System.Globalization.CultureInfo.CurrentCulture.ToString();
+ }
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+@Styles.Render("~/Content/kendo/css")
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SqlHealthStatus- @Model.PageName</title>
+   
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/signalr")*@
+    @Scripts.Render("~/bundles/gridApp")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/JQueryUI")
+    <script src="@Url.Content("~/Scripts/kendo/cultures/kendo.culture." + culture + ".js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/messages/kendo.messages." + culture + ".js")"></script>
+    <script src="@Url.Content("~/Scripts/gridApp/gridApp.messages." + culture + ".js")"></script>
+</head>
+
+<body>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top" id="MainTopNavbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div id="ViewTitle" style="padding-right:6px" href="#"></div>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        @Ajax.ActionLinksBuilder("<li>", "</li>", x => x.Item1 == "Home")
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Resources.Global.Views<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @Ajax.ActionLinksBuilder("<li>", "</li>", x => x.Item4 == typeof(SqlDashBoardPage))
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Resources.Global.Tools<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @*@Ajax.ActionLinksBuilder("<li>", "</li>", x => x.Item4 == typeof(ToolPage))*@
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                            @Html.Partial("_LoginPartial")
+                  
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Resources.Global.Language<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li>@Html.ActionLink("Czech", "SaveLanguagePreference", Model.ControllerName,new {Language= "cs-CZ" },null)</li>
+                                <li>@Html.ActionLink("English", "SaveLanguagePreference", Model.ControllerName, new { Language = "en-US" },null)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                 
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <!-- Main component for a primary marketing message or call to action -->
+            <div style="text-align: center">
+                <div id="jumbo" class="jumbotron" style="margin: 0 auto; text-align: left;display: inline-block">
+
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <!-- /container -->
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+
+
+</body>
+</html>
+<span style="color:red;font-size:6px"id="notification"></span>
+@RenderSection("Scripts", false)
+<script>
+    window.shared_Layout = new function () {
+        this.popupNotification = new gridApp.KendoWrappedNotification("#notification");
+        this.onBegin = (function onBegin() {
+            kendo.ui.progress($('#MainTopNavbar'), true);
+        }());
+        //HACK:prevent column menu to close after its lost focu
+        kendo.ui.Menu.fn._mouseleave = function () { };
+
+
+        this.onComplete = function onComplete() {
+            document.getElementById("ViewTitle").innerHTML = '<div id="ApplicationName"style="color:#f9b303">SqlHealthMonitor</div><div id="NavigationView">@Model.PageName' + '/@Model.StartActionName</div>';
+            //document.getElementById("ViewTitle").innerHTML = "Network Query-" + viewName;
+            kendo.ui.progress($('#MainTopNavbar'), false);
+        }
+        this.signalRInit = function signalRInit(popupNotification) {
+            var popupNotification = popupNotification;
+
+            $.connection.hub.logging = true;
+            var test = window.shared_Layout;
+            $.connection.taskManagerHub.client.popUpNotification = function (text, type, autoHide) {
+                if (!autoHide) {
+                    popupNotification.setOptions({
+                        autoHideAfter: 0
+                    });
+
+                }
+                popupNotification.show(text, type);
+            };
+            $.connection.taskManagerHub.client.reportProgress = function () {
+                $("#CsvGrid").data("kendoGrid").__proto__._progress = function Stub(a)
+                { };
+                $("#CsvGrid").data("kendoGrid").dataSource.read();
+
+                //kendo.ui.progress(grid, false);
+                //kendo.ui.progress = Stub;
+                // kendo.ui.progress(grid, false);
+            };
+            //$.connection.taskManagerHub.client.uploadDone = function () {
+            //    var upl = $("#files").data("kendoUpload").element;
+            //    var tees = $(upl).closest(".k-dropzone")
+            //    var pok = tees.find(".k-upload-status.k-upload-status-total");
+            //    pok.html('ProcessingFile')
+            //}
+            $.connection.hub.start()
+                .done(function () {
+                });
+        }
+
+    }()
+    $(window).on("load", function () {
+        shared_Layout.onComplete();
+    });
+    $(document).ready(function () {
+
+    });
+    </script>
+

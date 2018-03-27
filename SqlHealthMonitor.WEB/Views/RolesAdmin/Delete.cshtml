@@ -1,0 +1,34 @@
+﻿@model SqlHealthMonitor.BLL.Models.Identity.UserLogin.ApplicationRolePageViewModel
+
+@{
+    ViewBag.Title = @Resources.Global.Delete;
+}
+
+<h2>@Resources.Global.Delete</h2>
+
+<h3>@Resources.Global.ConfirmOfDeleteRole</h3>
+<p>@Resources.Global.ConfirmOfDeleteRoleNotice</p>
+<div>
+    <hr />
+    <dl >
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles.SingleOrDefault().Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Roles.SingleOrDefault().Name)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <div style="display:inline-block;clear:both">
+                <input type="submit" value=@Resources.Global.Delete class="btn btn-default" />
+            </div>
+        </div>
+    }
+            
+            <div>@Html.ActionLink(@Resources.Global.BackToList, "Index")</div>
+</div>

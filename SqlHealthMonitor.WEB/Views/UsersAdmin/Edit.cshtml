@@ -1,0 +1,58 @@
+﻿@model SqlHealthMonitor.BLL.Models.Identity.EditUserViewModel
+
+@{
+    ViewBag.Title = @Resources.Global.Edit;
+}
+
+<h2>@Resources.Global.Edit</h2>
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-12" })
+            <div class="col-md-12">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "col-md-12" })
+            <div class="col-md-12">
+               @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Roles", new { @class = "col-md-12" })
+            <span class="col-md-12">
+               @if (Model != null)
+               {
+                foreach (var item in Model.RolesList)
+                {
+                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                    @Html.Label(item.Value, new { @class = "control-label" })
+                }
+               }
+            </span>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value=@Resources.Global.Save class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(@Resources.Global.BackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

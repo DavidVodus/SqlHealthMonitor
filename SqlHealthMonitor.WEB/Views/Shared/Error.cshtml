@@ -1,0 +1,17 @@
+﻿@model SqlHealthMonitor.BLL.Models.WebPages.ErrorPageViewModel
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h3>
+        @Html.LabelFor(x=>x.Exception.Message) :
+        @Html.DisplayFor(m => m.Exception.Message)
+</h3>
+<h3>   @Html.LabelFor(x=>x.StartActionName) : 
+    @Html.DisplayFor(m => m.StartActionName)</h3>
+<h3>   @Html.LabelFor(x=>x.ControllerName)  :
+    @Html.DisplayFor(m => m.ControllerName)</h3>
+

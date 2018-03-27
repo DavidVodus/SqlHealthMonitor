@@ -1,0 +1,37 @@
+﻿@model SqlHealthMonitor.BLL.Models.Identity.UserLogin.ApplicationUserPageViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Resources.Global.Listofusers</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+<p>
+    @Html.ActionLink(@Resources.Global.CreateNewUser, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           @Resources.Global.UserName
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Users)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink(@Resources.Global.Edit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(@Resources.Global.Details, "Details", new { id = item.Id }) |
+                @Html.ActionLink(@Resources.Global.Resetpassword, "ChangePassword", new { id = item.Id }) |
+                @Html.ActionLink(@Resources.Global.Delete, "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
