@@ -4,6 +4,9 @@ using System.Data.Entity.Infrastructure;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SqlHealthMonitor.DAL.Models.Identity.UserLogin;
 using SqlHealthMonitor.DAL.Models.WebPages;
+using SqlHealthMonitor.DAL.Models;
+using SqlHealthMonitor.DAL.Models.Widgets;
+using System.Linq;
 
 namespace SqlHealthMonitor.DAL.DatabaseContext
 {
@@ -18,7 +21,7 @@ namespace SqlHealthMonitor.DAL.DatabaseContext
         }
         public DbSet<PageBase> PageBases { get; set; }
 
-
+      
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
           
@@ -32,6 +35,11 @@ namespace SqlHealthMonitor.DAL.DatabaseContext
             modelBuilder.Entity<HomePage>().ToTable("HomePages", "webpage");
             modelBuilder.Entity<PageBase>().ToTable("PageBases", "webpage");
             modelBuilder.Entity<SqlDashBoardPage>().ToTable("SqlDashBoardPage", "webpage");
+            modelBuilder.Entity<WidgetBase>().ToTable("WidgetBases", "widget");
+            modelBuilder.Entity<CpuWidget>().ToTable("CpuWidget", "widget");
+            modelBuilder.Entity<JobsWidget>().ToTable("JobsWidget", "widget");
+            modelBuilder.Entity<DatabasesSizeWidget>().ToTable("DatabasesSizeWidgets", "widget");
+
         }
     }
 }

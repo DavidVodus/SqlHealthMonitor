@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Castle.DynamicProxy;
-using Kendo.Mvc;
-using Kendo.Mvc.UI;
+
 using SqlHealthMonitor.BLL.Attributes.Markers;
 using SqlHealthMonitor.BLL.Services;
 using Newtonsoft.Json;
@@ -55,26 +54,7 @@ namespace SqlHealthMonitor.BLL.Services
             }
             return (T)(object)Attribute.GetCustomAttribute(methodInfo, typeof(T));
         }
-        /// <summary>
-        ///iterate throught arguments of method and try to find out,if it's a kendoArg,
-        ///if so and any filter has been set,return true
-        /// </summary>
-        /// <param name="arguments"></param>
-        /// <returns></returns>
-        private static bool IsKendoArgumentEmpty(object[] arguments)
-        {
-            foreach (var arg in arguments)
-            {
-                if (arg.GetType() == typeof(Kendo.Mvc.UI.DataSourceRequest))
-                {
-                    var kendoArg = (Kendo.Mvc.UI.DataSourceRequest)arg;
-                    if (kendoArg.Filters.Count <= 0)
-                        return true;
-                    return false;
-                }
-            }
-            return false;
-        }
+
         /// <summary>
         ///  every called method must proceed throught this method
         /// </summary>
@@ -84,7 +64,7 @@ namespace SqlHealthMonitor.BLL.Services
           
             var attribute = getCustomAttribute<CacheMeAttribute>(invocation);
             //If request comes from kendoGrid methods and none filter has been set, no caching will be used
-            if (attribute != null && !IsKendoArgumentEmpty(invocation.Arguments))
+            if (attribute != null)
             {
                 //argumentJson contain arguments ,they were passed by calling method
               List<string> argumentJson = new List<string>();

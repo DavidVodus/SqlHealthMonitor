@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Content/tabulator/variables.css",
+    "inputFile": "Content/tabulator/variables.scss"
+  },
+  {
+    "outputFile": "Content/tabulator/tabulator_bootstrap.css",
+    "inputFile": "Content/tabulator/tabulator_bootstrap.scss"
+  },
+  {
+    "outputFile": "Content/tabulator/main.css",
+    "inputFile": "Content/tabulator/main.scss"
+  }
+]

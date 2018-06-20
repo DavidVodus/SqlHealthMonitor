@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlHealthMonitor.BLL", "SqlHealthMonitor.BLL\SqlHealthMonitor.BLL.csproj", "{53B0D771-ED18-4CE8-A895-A869B799DAA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9A2D6074-B443-4E7C-8A92-48DB9937A799}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SqlHealthMonitor.SqlUserScript", "SqlHealthMonitor.SqlUserScript\SqlHealthMonitor.SqlUserScript.sqlproj", "{146FD9AD-592C-4178-B096-9ECBB7B81326}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,16 @@ Global
 		{53B0D771-ED18-4CE8-A895-A869B799DAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53B0D771-ED18-4CE8-A895-A869B799DAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53B0D771-ED18-4CE8-A895-A869B799DAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A2D6074-B443-4E7C-8A92-48DB9937A799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A2D6074-B443-4E7C-8A92-48DB9937A799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A2D6074-B443-4E7C-8A92-48DB9937A799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A2D6074-B443-4E7C-8A92-48DB9937A799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146FD9AD-592C-4178-B096-9ECBB7B81326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146FD9AD-592C-4178-B096-9ECBB7B81326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146FD9AD-592C-4178-B096-9ECBB7B81326}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{146FD9AD-592C-4178-B096-9ECBB7B81326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146FD9AD-592C-4178-B096-9ECBB7B81326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146FD9AD-592C-4178-B096-9ECBB7B81326}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

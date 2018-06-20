@@ -86,6 +86,55 @@
     <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201803201346275_SqlDashBoardPage.Designer.cs">
       <DependentUpon>201803201346275_SqlDashBoardPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201803290928210_SqlServer collection to user.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201803290928210_SqlServer collection to user.Designer.cs">
+      <DependentUpon>201803290928210_SqlServer collection to user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201804161412151_widgets.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201804161412151_widgets.Designer.cs">
+      <DependentUpon>201804161412151_widgets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201804161503054_widgets-param.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201804161503054_widgets-param.Designer.cs">
+      <DependentUpon>201804161503054_widgets-param.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805160952592_widgetUpdate.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805160952592_widgetUpdate.Designer.cs">
+      <DependentUpon>201805160952592_widgetUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805161007005_widgetUpdateFK.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805161007005_widgetUpdateFK.Designer.cs">
+      <DependentUpon>201805161007005_widgetUpdateFK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805181350233_neco pridano.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805181350233_neco pridano.Designer.cs">
+      <DependentUpon>201805181350233_neco pridano.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805221522459_from conc widget to base.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805221522459_from conc widget to base.Designer.cs">
+      <DependentUpon>201805221522459_from conc widget to base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805221540024_from conc widget to base2.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805221540024_from conc widget to base2.Designer.cs">
+      <DependentUpon>201805221540024_from conc widget to base2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806041248467_cpusettings.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806041248467_cpusettings.Designer.cs">
+      <DependentUpon>201806041248467_cpusettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806051329319_width\height.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806051331419_widt.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806051331419_widt.Designer.cs">
+      <DependentUpon>201806051331419_widt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806061357540_Databases.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806061357540_Databases.Designer.cs">
+      <DependentUpon>201806061357540_Databases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806071320388_datid.cs" />
+    <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806071320388_datid.Designer.cs">
+      <DependentUpon>201806071320388_datid.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\Configuration.cs" />
     <Compile Include="DatabaseContext\SqlHealthMonitorDbContext.cs" />
     <Compile Include="Helpers\EntityFrameworkExtension.cs" />
@@ -102,24 +151,32 @@
     <Compile Include="Models\Identity\UserLogin\ApplicationUserLogin.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUserRole.cs" />
     <Compile Include="Models\Log.cs" />
+    <Compile Include="Models\SqlServerData.cs" />
     <Compile Include="Models\WebPages\HomePage.cs" />
     <Compile Include="Models\WebPages\PageBase.cs" />
     <Compile Include="Models\WebPages\SqlDashBoardPage.cs" />
+    <Compile Include="Models\Widgets\CpuWidget.cs" />
+    <Compile Include="Models\Widgets\DatabasesSizeWidget.cs" />
+    <Compile Include="Models\Widgets\JobsWidget.cs" />
+    <Compile Include="Models\Widgets\WidgetBase.cs" />
     <Compile Include="Repositories\ApplicationUser.cs" />
     <Compile Include="Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Repositories\ILogRepository.cs" />
     <Compile Include="Repositories\IPageRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ISqlServerDataRepository.cs" />
+    <Compile Include="Repositories\IWidgetRepository.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\PageRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\SqlServerDataRepository.cs" />
+    <Compile Include="Repositories\WidgetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\WebPages\Components\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +194,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201803201346275_SqlDashBoardPage.resx">
       <DependentUpon>201803201346275_SqlDashBoardPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201803290928210_SqlServer collection to user.resx">
+      <DependentUpon>201803290928210_SqlServer collection to user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201804161412151_widgets.resx">
+      <DependentUpon>201804161412151_widgets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201804161503054_widgets-param.resx">
+      <DependentUpon>201804161503054_widgets-param.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805160952592_widgetUpdate.resx">
+      <DependentUpon>201805160952592_widgetUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805161007005_widgetUpdateFK.resx">
+      <DependentUpon>201805161007005_widgetUpdateFK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805181350233_neco pridano.resx">
+      <DependentUpon>201805181350233_neco pridano.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805221522459_from conc widget to base.resx">
+      <DependentUpon>201805221522459_from conc widget to base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201805221540024_from conc widget to base2.resx">
+      <DependentUpon>201805221540024_from conc widget to base2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806041248467_cpusettings.resx">
+      <DependentUpon>201806041248467_cpusettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806051331419_widt.resx">
+      <DependentUpon>201806051331419_widt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806061357540_Databases.resx">
+      <DependentUpon>201806061357540_Databases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\201806071320388_datid.resx">
+      <DependentUpon>201806071320388_datid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

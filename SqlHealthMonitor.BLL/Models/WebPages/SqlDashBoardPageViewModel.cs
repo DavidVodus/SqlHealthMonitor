@@ -8,5 +8,8 @@ namespace SqlHealthMonitor.BLL.Models.WebPages
 {
     public class SqlDashBoardPageViewModel : PageViewModelBase
     {
+      
+        public List<WidgetViewModelBase> Widgets { get; set; }
+      
     }
 }

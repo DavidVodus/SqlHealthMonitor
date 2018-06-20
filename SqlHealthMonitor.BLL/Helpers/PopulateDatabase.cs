@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity.Validation;
 using System.Text;
-using SqlHealthMonitor.BLL.Models.NetworkData;
+
 using SqlHealthMonitor.DAL.Managers;
 using SqlHealthMonitor.DAL.Models.Identity.UserLogin;
 using SqlHealthMonitor.DAL.Models.WebPages;
@@ -38,8 +38,6 @@ namespace SqlHealthMonitor.BLL.Helpers
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                //var user = new ApplicationUser { UserName = userViewModel.UserName, Email = userViewModel.Email, PagePreferences = new PagePreferences() };
-                //var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
                 try
                 {
                     user = new ApplicationUser {UserName = name, Email = ""};
@@ -75,46 +73,20 @@ namespace SqlHealthMonitor.BLL.Helpers
 
         public static void CreateViews(DbContext context)
         {
-            //DbContext test= ContextManager.GetDbContext("NetworkFlowRepositoryContext");
-            // var users = test.Set<ApplicationUser>();
-            // var user = users.First();
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var admin = userManager.FindByName("Admin");
             if(admin==null)
                 throw new InvalidOperationException("Admin doesnt exist in Database");
             PageRepository pageRepository = new PageRepository(context);
-            //GridPageRepository gridPageRepository = new GridPageRepository(context);
-            //GridColumnDefinitionRepository columnRepository = new GridColumnDefinitionRepository(context);
-       
             List<PageBase> pages = new List<PageBase>();
-            //var oc = (test as IObjectContextAdapter).ObjectContext;
-            //pages.Add(new GridPage()
-            //{
-
-            //    Columns = EntityModelBuilder.CreateColumnModel(typeof(SwitchInterfaceViewModel)),
-            //    PageName = "CableBook",
-            //    StartActionName = "Index",
-            //    ControllerName = "CableBook_",
-            //    ApplicationUser = admin
-            //});
-
-            //pages.Add(new GridPage()
-            //{
-
-            //    Columns = EntityModelBuilder.CreateColumnModel(typeof(LogViewModel)),
-            //    PageName = "Logs",
-            //    StartActionName = "Index",
-            //    ControllerName = "Log",
-            //    ApplicationUser = admin
-
-            //});
 
             pages.Add(new HomePage()
             {
                 PageName = "Home",
                 StartActionName = "Index",
                 ControllerName = "Home",
-                ApplicationUser = admin
+                ApplicationUser = admin,
+                ApplicationUserId=admin.Id
 
             });
             pages.Add(new SqlDashBoardPage()
@@ -122,35 +94,10 @@ namespace SqlHealthMonitor.BLL.Helpers
                 PageName = "SqlDashBoard",
                 StartActionName = "Index",
                 ControllerName = "SqlDashBoard",
-                ApplicationUser = admin
+                ApplicationUser = admin,
+                ApplicationUserId = admin.Id
             });
-            //pages.Add(new GridPage()
-            //{
-            //    Columns = EntityModelBuilder.CreateColumnModel(typeof(SwitchInterfaceMacViewModel)),
-            //    PageName = "CableBook_MacRecord",
-            //    StartActionName = "Index",
-            //    ControllerName = "CableBook_MacRecord",
-            //    ApplicationUser = admin
-
-            //});
-            //pages.Add(new ToolPage()
-            //{
-            //    PageName = "CsvBaseReport",
-            //    StartActionName = "Index",
-            //    ControllerName = "CsvBaseReport",
-            //    ApplicationUser = admin
-
-            //});
-            //pages.Add(new GridPage()
-            //{
-            //    Columns = EntityModelBuilder.CreateColumnModel(typeof(SwitchInterfaceMacProbeViewModel)),
-            //    PageName = "CableBook_MacRecordProbe",
-            //    StartActionName = "Index",
-            //    ControllerName = "CableBook_MacRecordProbe",
-            //    ApplicationUser = admin
-
-            //});
-
+          
             foreach (var createdPage in pages)
             {
                 //find page type in database
@@ -166,41 +113,19 @@ namespace SqlHealthMonitor.BLL.Helpers
                         databasePage.PageName = createdPage.PageName;
                         databasePage.StartActionName = createdPage.StartActionName;
                     }
-                    //createdPage.PageId = page.PageId;
-                    //if that is main gridpage, change columns definitions,if its users page,  just add new columns
-                    //if (databasePage is GridPage)
-                    //{
-                    //    UpdateGridPageBase(createdPage as GridPage, databasePage as GridPage, columnRepository, context);
-                    //    //if that is main page definition
-                    //    //if (createdPage.ApplicationUser == null)
-                    //    //    gridPageRepository.Update(createdPage as GridPage);
-                    //    //TODO> update only system property on users page
-                    //}
+                 
                     pageRepository.Update(databasePage);
 
                 }
                 //if it is new page in the system, add it to database
                 if(!databasePages.Any())
                 {
-                    pageRepository.Add(createdPage);
+                    pageRepository.Add(createdPage,x=> new { x.ApplicationUser });
                 }
                 pageRepository.Save();
             }
 
-            ////If already exist, doesnt anything
-            //foreach (var view in gridPageRepository.GetAll())
-            //{
-            //    if (view.Columns != null)
-            //    {
-            //        foreach (var column in view.Columns)
-            //        {
-            //            // var col = columnPreferenceRepository.GetQueryable().First(x => x.ViewPreferenceId == null && x.Column.GridColumnId == column.GridColumnId);
-            //            if (columnPreferenceRepository.GetQueryable().Count(x=> x.Column.GridColumnId == column.GridColumnId) <= 0)
-            //                columnPreferenceRepository.Add(new ColumnPreference { Column = column, PagePreferenceBaseId= view .PageId});
-            //        }
-            //        columnPreferenceRepository.Save();
-            //    }
-            //}
+        
         }
 
 

@@ -9,10 +9,12 @@ namespace SqlHealthMonitor.DAL.Repositories
     {
         /// <summary> 
         /// Add entity to the repository 
+        /// Set up properties of entity to Unchanged state prevent EF from creating new record in DB
         /// </summary> 
         /// <param name="entity">the entity to add</param> 
+        /// <param name="childrenToUnchanged">properties of entity to be set up in the EF graph as UNCHANGED,must be created like this :new { something.someProperty}</param> 
         /// <returns>The added entity</returns> 
-        void Add(T entity);
+        void Add(T entity, Expression<Func<T, object>> childrenToUnchanged = null);
 
         void Attach(T entity);
 

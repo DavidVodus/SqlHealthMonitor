@@ -45,9 +45,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Kendo.Mvc">
-      <HintPath>..\lib\KENDOUIMVC\2017.2.504.545\Kendo.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -99,28 +96,30 @@
   <ItemGroup>
     <Compile Include="Attributes\Markers\CacheMeAttribute.cs" />
     <Compile Include="Helpers\PopulateDatabase.cs" />
+    <Compile Include="Models\DatabasesSizeWidgetViewModel.cs" />
     <Compile Include="Models\Identity\AccountViewModels.cs" />
     <Compile Include="Models\Identity\AdminViewModels.cs" />
     <Compile Include="Models\Identity\ManageViewModels.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationRolePageViewModel.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUserPageViewModel.cs" />
     <Compile Include="Models\LogViewModel.cs" />
-    <Compile Include="Models\NetworkData\InterfaceViewModel.cs" />
-    <Compile Include="Models\NetworkData\MacTableRecordViewModel.cs" />
-    <Compile Include="Models\NetworkData\MaxSwitchesTimeStampViewModel.cs" />
-    <Compile Include="Models\NetworkData\ProbeDataViewModel.cs" />
-    <Compile Include="Models\NetworkData\SwitchInterfaceMacProbeViewModel.cs" />
-    <Compile Include="Models\NetworkData\SwitchInterfaceMacViewModel.cs" />
-    <Compile Include="Models\NetworkData\SwitchInterfaceViewModel.cs" />
-    <Compile Include="Models\NetworkData\SwitchViewModel.cs" />
-    <Compile Include="Models\WebPages\AddDbServerViewModel.cs" />
-    <Compile Include="Models\WebPages\Components\GridColumnDefinitionViewModel .cs" />
+    <Compile Include="Models\WebPages\CpuPageViewModel.cs" />
+    <Compile Include="Models\WebPages\CpuSettingsPageViewModel.cs" />
+    <Compile Include="Models\CpuWidgetViewModel.cs" />
+    <Compile Include="Models\WebPages\DatabasesSizePageViewModel.cs" />
+    <Compile Include="Models\WebPages\DatabasesSizeSettingsPageViewModel.cs" />
     <Compile Include="Models\WebPages\ErrorPageViewModel.cs" />
     <Compile Include="Models\WebPages\HomePageViewModel.cs" />
+    <Compile Include="Models\WebPages\JobsPageViewModel.cs" />
+    <Compile Include="Models\JobsWidgetViewModel.cs" />
     <Compile Include="Models\WebPages\ManagePreferenceUserViewModel.cs" />
-    <Compile Include="Models\WebPages\PageReviewViewModel.cs" />
+    <Compile Include="Models\WebPages\NavigationPath.cs" />
+    <Compile Include="Models\WebPages\PageSettingViewModel.cs" />
     <Compile Include="Models\WebPages\PageViewModelBase.cs" />
     <Compile Include="Models\WebPages\SqlDashBoardPageViewModel.cs" />
+    <Compile Include="Models\SqlServerDataViewModel.cs" />
+    <Compile Include="Models\WebPages\WidgetGridPageViewModel.cs" />
+    <Compile Include="Models\WidgetViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Global.en1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -135,14 +134,22 @@
     <Compile Include="Services\CacheInterceptor.cs" />
     <Compile Include="Services\CacheService.cs" />
     <Compile Include="Services\CpuService.cs" />
+    <Compile Include="Services\DatabasesSizeService.cs" />
     <Compile Include="Services\ICacheService.cs" />
     <Compile Include="Services\ICpuService.cs" />
+    <Compile Include="Services\IDatabasesSizeService.cs" />
+    <Compile Include="Services\IJobsService.cs" />
     <Compile Include="Services\ILogService.cs" />
     <Compile Include="Services\IPageService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\ISqlServerDataService.cs" />
+    <Compile Include="Services\IWidgetService.cs" />
+    <Compile Include="Services\JobsService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\PageService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\SqlServerDataService.cs" />
+    <Compile Include="Services\WidgetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -169,6 +176,9 @@
       <LastGenOutput>Global1.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\SqlQuery_1.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

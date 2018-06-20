@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SqlHealthMonitor.DAL.Models.WebPages;
+using SqlHealthMonitor.DAL.Models.Widgets;
 
 namespace SqlHealthMonitor.DAL.Models.Identity.UserLogin
 {
@@ -23,6 +24,10 @@ namespace SqlHealthMonitor.DAL.Models.Identity.UserLogin
     }
 
         // [Association("ClientClientCodes","Id", "RootPreferenceId")]
+        [ForeignKey("ApplicationUserId")]
+        public ICollection<WidgetBase> Widgets { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        public  ICollection<SqlServerData> SqlServers { get; set; }
 
         [ForeignKey("ApplicationUserId")]
         public ICollection<PageBase> PagesPreferences { get; set; }

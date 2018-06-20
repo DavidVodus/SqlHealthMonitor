@@ -11,6 +11,8 @@ using System.Data.Entity.Validation;
 using System.Text;
 using SqlHealthMonitor.DAL.Helpers;
 using System.Data.Entity.Infrastructure;
+using System.Security.Principal;
+using System.Data.Entity.Core.Objects;
 
 namespace SqlHealthMonitor.DAL.Repositories
 {
@@ -18,7 +20,6 @@ namespace SqlHealthMonitor.DAL.Repositories
    where T : class
     {
         protected DbContext _dbContext;
-
         private bool disposed = false;
 
         protected RepositoryBase(DbContext context)
@@ -28,6 +29,14 @@ namespace SqlHealthMonitor.DAL.Repositories
         }
 
         protected DbSet<T> Data => _dbContext.Set<T>();
+        private IEnumerable<string> FindPkNames()
+        {
+            ObjectContext objectContext = ((IObjectContextAdapter)_dbContext).ObjectContext;
+            ObjectSet<T> set = objectContext.CreateObjectSet<T>();
+           return  set.EntitySet.ElementType
+                                                        .KeyMembers
+                                                        .Select(k => k.Name);
+        }
 
         private void SetTransactionTimeOut()
         {
@@ -40,9 +49,17 @@ namespace SqlHealthMonitor.DAL.Repositories
             machineSettings.MaxTimeout = TimeSpan.MaxValue;
             ///TODO :tohle je divny dodelat ulozit kontext trebas do privatni prom tehle triy
         }
+       
 
-        public void Add(T entity)
+        public void Add(T entity,Expression<Func<T, object>> childrenToUnchanged = null)
         {
+
+            if (childrenToUnchanged != null)
+                foreach (MemberExpression argument in ((NewExpression)childrenToUnchanged.Body).Arguments)
+                {
+                  var childrenEntity=_dbContext.Entry<T>(entity).Member(argument.Member.Name);
+                    childrenEntity.EntityEntry.State = EntityState.Unchanged;
+                }
             Data.Add(entity);
 
         }
@@ -117,12 +134,15 @@ namespace SqlHealthMonitor.DAL.Repositories
 
         public void Update(T entity, Expression<Func<T, object>> childrenToUpdate = null)
         {
-            this.Attach(entity);
-            var entry = _dbContext.Entry<T>(entity);
+          
+            var keyName = FindPkNames().Single();
+            var key = typeof(T).GetProperty(keyName).GetValue(entity);
+            T attachedEntity = _dbContext.Set<T>().Find(key);
+             var entry = _dbContext.Entry<T>(attachedEntity);
+            //fill out entry with new values
             entry.CurrentValues.SetValues(entity);
-
-            if (entry.State != EntityState.Added)
-                entry.State = EntityState.Modified; // attach the entity
+          
+       
             //load null navigation entity
             //TODO load only required entity
             foreach (var edmNavigationProperty in entry.GetNavigationProperties(_dbContext))

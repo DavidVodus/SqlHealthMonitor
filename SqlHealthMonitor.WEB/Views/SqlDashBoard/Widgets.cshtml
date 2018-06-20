@@ -1,0 +1,170 @@
+﻿@model SqlHealthMonitor.BLL.Models.WebPages.SqlDashBoardPageViewModel
+@using SqlHealthMonitor.BLL.Models.WebPages;
+@using SqlHealthMonitor.BLL.Models
+<style>
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+            #sortable li {
+                overflow: auto;
+                margin: 3px 3px 3px 0;
+                padding: 1px;
+                float: left;
+                /*width: 400px;
+                height: 400px;*/
+                font-size: 0.8em;
+                /*text-align: center*/
+                background: none;
+            }
+    </style>
+@if (Model.Widgets.Count() > 0)
+{
+<div class="card border-secondary text-white bg-dark  mb-3 ">
+    <div class="card-header">@Resources.Global.ControlPanel</div>
+    <div class="card-body">
+        <button class="btn btn-primary" type="button" id="save_but">@Resources.Global.Save</button>
+    </div>
+</div>
+}
+else
+{
+    <div class="card border-secondary text-white bg-dark  mb-3 ">
+        <div class="card-header">Controll Panel</div>
+        <div class="card-body">No Widgets
+           
+        </div>
+    </div>
+
+}
+
+
+<ul id="sortable">
+  @foreach (var item in Model.Widgets.OrderBy(x=>x.Order))
+  {
+
+      if (item.Type.ToString() == "CpuWidget")
+      {
+        <li class="ui-state-default resizable" id=@item.WidgetId >
+            @Html.Action("Index", "CpuWidget", new CpuPageViewModel
+       { Widget = new CpuWidgetViewModel {
+           SqlServerDataId = item.SqlServerDataId,
+           UpdateInterval = item.UpdateInterval,
+           WidgetId = item.WidgetId,
+           Name = item.Name,
+           NumberOfRecords = ((CpuWidgetViewModel)item).NumberOfRecords,
+           Type = item.Type
+       }
+       })
+         </li>
+      }
+      if (item.Type.ToString() == "JobsWidget")
+      {
+        <li class="ui-state-default resizable" id=@item.WidgetId >
+            @Html.Action("Index", "JobsWidget", new JobsPageViewModel
+       {
+           Widget = new JobsWidgetViewModel
+           {
+               SqlServerDataId = (int?)((JobsWidgetViewModel)item).SqlServerDataId,
+               UpdateInterval = item.UpdateInterval,
+               WidgetId = item.WidgetId,
+               Name = item.Name
+           }
+       })
+        </li>
+      }
+
+      if (item.Type.ToString() == "DatabasesSizeWidget")
+      {
+        <li class="ui-state-default resizable tableInside" id=@item.WidgetId>
+            @Html.Action("Index", "DatabasesSizeWidget", new DatabasesSizePageViewModel
+       {
+           Widget = new DatabasesSizeWidgetViewModel
+           {
+               SqlServerDataId = item.SqlServerDataId,
+               UpdateInterval = item.UpdateInterval,
+               WidgetId = item.WidgetId,
+               Name = item.Name,
+               DatabaseIds = ((DatabasesSizeWidgetViewModel)item).DatabaseIds,
+               Type=item.Type
+                }
+            })
+        </li>
+      }
+
+  }
+
+</ul>
+@section NavBar{
+    @Html.Partial("SqlDashBoardNavBar")
+}
+
+
+
+<script>
+    $(window).on('load', function () {
+      //sqlHealthMonitor.setDimensionByBiggest( $('li.tableInside'));
+    });
+    $(document).ready(function () {
+        (function (sqlHealthMonitor, $, undefined) {
+            //add WidgetViewModel data to <li> widget sortable JavascriptObjet data("model")
+            //
+          @foreach (var item in Model.Widgets)
+          {
+           <text>var itemStringify = @Html.Raw(Json.Encode(item));</text>
+          <text> $("#" + itemStringify.WidgetId).data("model", itemStringify); </text>
+          <text> $("#" + itemStringify.WidgetId).width(@item.Width); </text>
+          <text> $("#"+itemStringify.WidgetId).height(@item.Height); </text>
+          }
+
+            $("#sortable").sortable();
+            $("#save_but").button()
+                .click(function (event) {
+                    save($("#sortable"));
+                });
+
+            $("#sortable").disableSelection();
+            $("li.resizable").resizable();
+            var themeClass = $("li.resizable").resizable("option", "classes.ui-resizable-se");
+            $("li.resizable").resizable("option", "classes.ui-resizable-se", "ui-icon ui-icon-grip-diagonal-se");
+
+          /**
+           *   Save order and dimension of widgets to database
+           * @@param sortableJobject
+           */
+         async function save(sortableJobject) {
+                try {
+                    var WidgetViewModels = [];
+                    var sortedIDs = sortableJobject.sortable("toArray");
+                    //iterate throught all <li> widgets and put data of them into model array
+                    //once it's completed,send them into controller for saving
+                    for (var i = 0; i < sortedIDs.length; i++) {
+                        var model = $("#" + sortedIDs[i]).data("model");
+                        model.Order = i;
+                        model.Width = $("#" + sortedIDs[i]).width();
+                        model.Height = $("#" + sortedIDs[i]).height();
+                        WidgetViewModels.push(model);
+                    }
+
+                    var data = await sqlHealthMonitor.jsonRequest("@Url.Action("WidgetsSettingsUpdate", Model.ControllerName)", WidgetViewModels);
+                    sqlHealthMonitor.showOkDialog(data.Message)
+                }
+                catch (e) {
+                    sqlHealthMonitor.showErrorDialog(e.Message)
+                }
+            }
+
+
+
+
+
+
+
+        }(window.sqlHealthMonitor = window.sqlHealthMonitor || {}, jQuery));
+    });
+</script>
+
+

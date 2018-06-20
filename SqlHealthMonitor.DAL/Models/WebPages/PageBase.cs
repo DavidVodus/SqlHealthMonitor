@@ -11,8 +11,9 @@ namespace SqlHealthMonitor.DAL.Models.WebPages
         public string ControllerName { get; set; }
         public string PageName { get; set; }
         public string StartActionName { get; set; }
-        [Required]
+        [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
+
         public string ApplicationUserId { get; set; }
     }
 }

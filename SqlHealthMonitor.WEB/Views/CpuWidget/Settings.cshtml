@@ -1,0 +1,69 @@
+﻿
+@model SqlHealthMonitor.BLL.Models.WebPages.CpuSettingsPageViewModel
+
+@using (Html.BeginForm("Settings", Model.ControllerName, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>@Resources.Global.Edit</h4>
+    <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            <h4>"Sql Servers"</h4>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Widget.NumberOfRecords, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.Widget.NumberOfRecords, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                @*@Html.DropDownListFor(id => id.CpuWidget.SqlServerDataId,
+          new SelectList(this.Model.SqlServers.Select(x => new SelectListItem { Text = x.Name, Value = x.SqlServerDataId.ToString(), Selected = x.SqlServerDataId == Model.CpuWidget.SqlServerDataId ? true : false }), "Value", "Text"))*@
+
+            </div>
+        </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.HiddenFor(id => id.Widget.WidgetId)
+                        @Html.HiddenFor(id => id.Widget.Name)
+                        @Html.HiddenFor(id => id.Widget.UpdateInterval)
+                        @Html.HiddenFor(id => id.Widget.SqlServerDataId)
+                        @Html.HiddenFor(id => id.Widget.Type)
+                        @Html.HiddenFor(id => id.Widget.Width)
+                        @Html.HiddenFor(id => id.Widget.Height)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                        <input type="submit" class="btn btn-default" value=@Resources.Global.Save />
+                    </div>
+                </div>
+}
+@section NavBar{
+<ol class="breadcrumb">
+    <li class="breadcrumb-item ">
+        @Html.ActionLink(@Resources.Global.Home, "Index", "Home")
+
+    </li>
+    <li class="breadcrumb-item ">
+        @Html.ActionLink("SqlDashBoard", "Index", "SqlDashBoard")
+
+    </li>
+    <li class="breadcrumb-item">
+        @Resources.Global.Settings
+    </li>
+    <li class="breadcrumb-item">
+        @Html.ActionLink(@Resources.Global.WidgetGrid, "Index", "WidgetGrid")
+    </li>
+    <li class="breadcrumb-item active">
+        @Resources.Global.Edit
+    </li>
+</ol>
+
+    }
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

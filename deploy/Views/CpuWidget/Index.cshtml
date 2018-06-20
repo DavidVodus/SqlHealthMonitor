@@ -1,0 +1,128 @@
+﻿@model SqlHealthMonitor.BLL.Models.WebPages.CpuPageViewModel
+
+@Scripts.Render("~/bundles/ChartJS")
+    <canvas id="cpuChart_@Model.Widget.WidgetId.ToString()"></canvas>
+    <script>
+        $(document).ready(function () {
+        (function (sqlHealthMonitor, $, undefined) {
+            var ctx = document.getElementById("cpuChart_@Model.Widget.WidgetId.ToString()");
+            var plotik = new Chart(ctx, {
+                type: 'line',
+                data: {
+
+                    datasets: [{
+                        label: 'Sql load',
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+
+                        fill: false,
+                    },
+                    {
+                        label: 'Other processes',
+                        backgroundColor: [
+                            'rgba(255, 20, 20, 0.2)'
+
+                        ],
+                        borderColor: [
+                            'rgba(255,255,0,0.3)'
+                        ],
+
+                        fill: false,
+                    }]
+                },
+                options: {
+                    animation: {
+                        duration: 0, // general animation time
+                    },
+                    hover: {
+                        animationDuration: 0, // duration of animations when hovering an item
+                    },
+                    responsiveAnimationDuration: 0, // anim
+                    responsive:true,
+                    title: {
+                        display: true,
+                        text: '@Model.Widget.Name'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            },
+                            ticks: {
+                                min: 0,
+                                max: 100,
+                                stepSize: 10
+                            }
+                        }]
+                    }
+                }
+            });
+                         ///Interval of updating the plot,default value is 1 minute
+                setInterval(async function () {
+                    //Json request return 6 values of CpuUsage in time,when others come, remove the old
+                    if (plotik.data.labels.length >= @Model.Widget.NumberOfRecords)
+                        removeData(plotik);
+                    try {
+                        var data = null;
+
+                        var data = await sqlHealthMonitor.jsonRequest("@Html.Raw(@Url.Action("Read", "CpuWidget",new { SqlServerDataId=Model.Widget.SqlServerDataId,NumberOfRecords = Model.Widget.NumberOfRecords }))");
+                    }
+                    catch (e) {
+                        sqlHealthMonitor.showErrorDialog(e.Message)
+                    }
+                    addData(plotik, data.Records);
+
+                },@Model.Widget.UpdateInterval==0 ? 60000 : @Model.Widget.UpdateInterval*1000);
+            //Add data to chart(Sql cpu load,others process,event time )
+            function addData(chart, data) {
+                data.forEach((data) => {
+                    chart.data.datasets[0].data.push(data.SqlServer);
+                    chart.data.datasets[1].data.push(data.Others);
+                    chart.data.labels.push(data.EventTimeText);
+                });
+
+                chart.update();
+            }
+            //remove all data from chart
+            function removeData(chart) {
+                chart.data.labels = [];
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data = [];
+                });
+                chart.update();
+            }
+
+        }(window.sqlHealthMonitor = window.sqlHealthMonitor || {}, jQuery));
+    })
+    </script>

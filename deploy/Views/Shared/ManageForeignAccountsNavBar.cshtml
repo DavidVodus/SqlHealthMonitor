@@ -1,0 +1,19 @@
+﻿
+<ol class="breadcrumb">
+    <li class="breadcrumb-item ">
+               @Html.Partial("UsersDropDown", new ViewDataDictionary { { "liClass", "breadcrumb-item" } })
+    </li>
+    <li class="breadcrumb-item active">
+        @Resources.Global.ForeignAccounts
+    </li>
+
+</ol>
+<ul class="nav nav-tabs">
+    <li class='nav - item'>
+        @Html.ActionLink(@Resources.Global.Roles, "Index", "RolesAdmin", null, new { @Class = "nav-link " + @Html.IsActive("Index", "RolesAdmin") })
+    </li>
+    <li class='nav - item'>
+        @Html.ActionLink(Resources.Global.Users, "Index", "UsersAdmin", null, new { @Class = "nav-link " + @Html.IsActive("Index", "UsersAdmin") })
+    </li>
+
+</ul>

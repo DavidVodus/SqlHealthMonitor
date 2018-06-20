@@ -1,0 +1,27 @@
+﻿@using SqlHealthMonitor.DAL.Models.WebPages
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item ">
+        @Html.ActionLink(@Resources.Global.Home, "Index", "Home")
+
+    </li>
+    <li class="breadcrumb-item dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Resources.Global.Views<span class="caret"></span></a>
+        <div class="dropdown-menu">
+            @Ajax.ActionLinksBuilder("", "", "dropdown-item", x => x.Type == typeof(SqlDashBoardPage))
+        </div>
+    </li>
+    <li class="breadcrumb-item active">
+        SqlDashBoard
+    </li>
+
+</ol>
+<ul class="nav nav-tabs">
+
+    <li class="nav-item">
+        @Html.ActionLink(@Resources.Global.WidgetsView, "Widgets", "SqlDashBoard", null, new { @Class = "nav-link " + @Html.IsActive("Widgets", "SqlDashBoard") })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink(@Resources.Global.Settings, "Settings", "SqlDashBoard", null, new { @Class = "nav-link " + @Html.IsActive("Settings", "SqlDashBoard") })
+    </li>
+</ul>

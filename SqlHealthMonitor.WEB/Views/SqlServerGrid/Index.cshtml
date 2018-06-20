@@ -1,0 +1,45 @@
+﻿@Styles.Render("~/Content/jtable/css")
+@Scripts.Render("~/bundles/jtable")
+@section NavBar{
+    @Html.Partial("SettingsNavBar")
+}
+<div id="SqlServerContainer"></div>
+
+<script>
+    $(document).ready(function () {
+        (function (sqlHealthMonitor, $, undefined) {
+            $('#SqlServerContainer').jtable({
+
+                jqueryuiTheme: true,
+                title: '@Resources.Global.TableofSqlServers',
+                actions: {
+                    listAction: '@Url.Action("Read", Model.ControllerName)',
+                    createAction: '@Url.Action("Create", Model.ControllerName)',
+                    updateAction: '@Url.Action("Update", Model.ControllerName)',
+                    deleteAction: '@Url.Action("Delete", Model.ControllerName)',
+                },
+                fields: {
+                    SqlServerDataId: {
+                        key: true,
+                        list: false
+                    },
+                    Name: {
+                        title: 'Name',
+                        width: '20%'
+                    },
+                    ConnectionString: {
+                        title: 'ConnectionString',
+                        width: '20%'
+                    },
+
+                }
+            });
+
+            $.hik.jtable.prototype._showError = function (message) {
+              sqlHealthMonitor.showErrorDialog(message);
+            };
+            $('#SqlServerContainer').jtable('load');
+        }(window.sqlHealthMonitor = window.sqlHealthMonitor || {}, jQuery));
+    }); 
+
+</script>

@@ -1,9 +1,27 @@
 ﻿using System;
+using System.Linq;
 
 namespace Common
 {
     public static class TypeHelper
     {
+        /// <summary>
+        /// Looks in all loaded assemblies for the given type.
+        /// </summary>
+        /// <param name="fullName">
+        /// The full name of the type.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Type"/> found; null if not found.
+        /// </returns>
+        public static Type FindType(string name)
+        {
+            return
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(a => !a.IsDynamic)
+                    .SelectMany(a => a.GetTypes())
+                    .Single(t => t.Name.Equals(name));
+        }
         public static Type GetTypeFromSimpleName(string typeName)
         {
             if (typeName == null)

@@ -12,6 +12,7 @@ using AutoMapper;
 using SqlHealthMonitor.DAL.Managers;
 using SqlHealthMonitor.DAL.Models.Identity.UserLogin;
 using Microsoft.AspNet.Identity;
+using SqlHealthMonitor.BLL.Models.WebPages;
 
 namespace SqlHealthMonitor.WEB.Controllers
 {
@@ -62,7 +63,8 @@ namespace SqlHealthMonitor.WEB.Controllers
                     return View("Create", "_Layout", userViewModel);
 
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.UserCreated });
+                return RedirectToAction("Index", new {message=Resources.Global.User + " " + user.UserName + " " + Resources.Global.Created });
+
             }
             ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
             return View("Create", "_Layout", userViewModel);
@@ -89,7 +91,7 @@ namespace SqlHealthMonitor.WEB.Controllers
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(model.Id);
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new { message = Resources.Global.Password+" "+ Resources.Global.For+" "+  Resources.Global.User + " " + Resources.Global.Changed});
             }
             AddErrors(result);
             return View("ChangePassword", "_Layout", model);
@@ -138,7 +140,8 @@ namespace SqlHealthMonitor.WEB.Controllers
                     ModelState.AddModelError("", result.Errors.First());
                     return View(" DeleteConfirmed", "_Layout",new ApplicationUserPageViewModel());
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.UserDeleted });
+                return RedirectToAction("Index", new { message = Resources.Global.User + " " + user.UserName + " " + Resources.Global.Deleted });
+             
             }
             return View(" DeleteConfirmed", "_Layout", new ApplicationUserPageViewModel());
         }
@@ -233,16 +236,10 @@ namespace SqlHealthMonitor.WEB.Controllers
 
         //
         // GET: /Users/
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(string message)
         {
-            ViewBag.StatusMessage =
-               message == ManageMessageId.ChangePasswordSuccess ? "Password has been changed."
-               : message == ManageMessageId.UserCreated ? "User Created"
-               : message == ManageMessageId.UserDeleted ? "User Deleted."
-                  : message == ManageMessageId.UsersInformationUpdated ? "Information about user updated."
-               : "";
 
-            var modelfiles = new ApplicationUserPageViewModel { Users = await UserManager.Users.ToListAsync() };
+            var modelfiles = new ApplicationUserPageViewModel { Users = await UserManager.Users.ToListAsync(),OkMessage=message };
             return View("Index", "_Layout", modelfiles);
         }
         private void AddErrors(IdentityResult result)

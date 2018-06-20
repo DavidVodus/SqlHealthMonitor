@@ -147,8 +147,8 @@
   <data name="LogOff" xml:space="preserve">
     <value>Odhlásit se</value>
   </data>
-  <data name="Manageyouraccount" xml:space="preserve">
-    <value>Správa mého účtu</value>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Můj účet</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Heslo</value>
@@ -292,7 +292,7 @@ Admin nastavení</value>
   <data name="Remove" xml:space="preserve">
     <value>Odstranit</value>
   </data>
-  <data name="Resetpassword" xml:space="preserve">
+  <data name="ChangePassword" xml:space="preserve">
     <value>Změnit heslo</value>
   </data>
   <data name="ResetpasswordConfirmation" xml:space="preserve">
@@ -360,5 +360,56 @@ Admin nastavení</value>
   </data>
   <data name="RemoveDbServer" xml:space="preserve">
     <value>Odeber Sql server</value>
+  </data>
+  <data name="SqlServersGrid" xml:space="preserve">
+    <value>Seznam Sql serverů</value>
+  </data>
+  <data name="WidgetGrid" xml:space="preserve">
+    <value>Seznam Widgetů</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Povedlo se to</value>
+  </data>
+  <data name="UnvalidForm" xml:space="preserve">
+    <value>Fomulář není validní!</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Domů</value>
+  </data>
+  <data name="ManageAccounts" xml:space="preserve">
+    <value>Správa účtů</value>
+  </data>
+  <data name="SetPassword" xml:space="preserve">
+    <value>Nastavit Heslo</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Změnit</value>
+  </data>
+  <data name="ForeignAccounts" xml:space="preserve">
+    <value>Cizí účty</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>změněn</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Vytvořen</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Smazán</value>
+  </data>
+  <data name="For" xml:space="preserve">
+    <value>pro</value>
+  </data>
+  <data name="TableofSqlServers" xml:space="preserve">
+    <value>Tabulka Sql serverů</value>
+  </data>
+  <data name="TableofWidgets" xml:space="preserve">
+    <value>Tabulka Widgetů</value>
+  </data>
+  <data name="Changed2" xml:space="preserve">
+    <value>Změněno</value>
+  </data>
+  <data name="ControlPanel" xml:space="preserve">
+    <value>Ovládací Panel</value>
   </data>
 </root>

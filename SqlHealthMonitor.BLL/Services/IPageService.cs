@@ -8,14 +8,12 @@ namespace SqlHealthMonitor.BLL.Services
     public interface IPageService
     {
         /// <summary>
-        /// base on page,create missing columnPreference in rootPreference.view. 
+        /// Get All web pages representation from the database 
         /// </summary>
-        /// <param name="controllerName"></param>
         /// <param name="userId"></param>
-        List<PageReviewViewModel> ReadPages(string userId);
+        List<PageSettingViewModel> ReadPages(string userId);
 
-        PageBase ReadPageProperties(string userId, string controllerName, string startActionName);
-        //void DeletePage(GridPageViewModel pageModel);
+   
 
         void SaveUserPreferences(PageBase page);
     }

@@ -1,57 +1,78 @@
-﻿using SqlHealthMonitor.BLL.Models.WebPages;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SqlHealthMonitor.BLL.Models;
+using SqlHealthMonitor.BLL.Models.WebPages;
 using SqlHealthMonitor.BLL.Services;
-using System.Web.Mvc;
+using SqlHealthMonitor.Helpers;
 
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Web.Mvc;
 
 namespace SqlHealthMonitor.WEB.Controllers
 {
-    public class SqlDashBoardController :  SqlHealthMonitor.Infrastructure.ControllerBase
+    [Authorize]
+    public class SqlDashBoardController : SqlHealthMonitor.Infrastructure.ControllerBase
     {
-        private ICpuService _cpuBaseService;
+        private IWidgetService _widgetService;
         public SqlDashBoardController
-            (ICpuService cpuBaseService)
+            ( IWidgetService widgetService)
 
         {
-            _cpuBaseService = cpuBaseService;
+            _widgetService = widgetService;
+
 
         }
 
-        // GET: SqlDashBoard
         public ActionResult Index()
         {
-            return View("Index", "_Layout", new SqlDashBoardPageViewModel());
-        }
-        [Route("{lang}/{controllerName}/Settings/AddDbServer")]
-        public ActionResult AddDbServer()
-        {
-            return View("Settings/AddDbServer", "Settings/_Layout", 
-                new AddDbServerViewModel { StartActionName= "Settings/AddDbServer" });
-        }
-        // POST: 
-        [Route("{lang}/{controllerName}/Settings/AddDbServer")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public void AddDbServer(AddDbServerViewModel model)
-        {
+            return RedirectToAction("Widgets");
 
         }
-        [Route("{lang}/{controllerName}/Settings/RemoveDbServer")]
-        public ActionResult RemoveDbServer()
-        {
-            return View("Settings/RemoveDbServer", "Settings/_Layout", 
-                new AddDbServerViewModel { StartActionName = "Settings/RemoveDbServer" });
-        }
-      
-     
 
-        public ActionResult AddNewWidget()
+        public ActionResult Settings()
         {
-            return View("AddNewWidget", "_Layout", new SqlDashBoardPageViewModel());
-        }
-        public JsonResult CpuLoad()
-        {
-            return Json(_cpuBaseService.GetCpuUsage());
+            return RedirectToAction("Index", "SqlServerGrid");
         }
 
+
+        public ActionResult Widgets(string Message)
+        {
+            try
+            {
+                var currentUserId = User.Identity.GetUserId();
+
+                var widgets = _widgetService.Read(x => x.ApplicationUserId == currentUserId);
+
+                return View("Widgets", "_Layout", new SqlDashBoardPageViewModel { Widgets = widgets ,OkMessage=Message});
+            }
+            catch (Exception ex)
+            {
+                return JsonHelper.JsonError(ex.Message);
+            }
+        }
+        public ActionResult WidgetsSettingsUpdate(WidgetViewModelBase[] models)
+        {
+            try
+            {
+                var currentUserId = User.Identity.GetUserId();
+                foreach (var item in models)
+                {
+                    _widgetService.Update(item,currentUserId);
+                }
+
+                return JsonHelper.JsonOk(null,Resources.Global.Success);
+
+            }
+            catch (Exception ex)
+            {
+                return JsonHelper.JsonError(ex.Message);
+            }
+
+
+        }
     }
 }

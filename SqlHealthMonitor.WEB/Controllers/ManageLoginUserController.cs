@@ -32,9 +32,9 @@ namespace SqlHealthMonitor.WEB.Controllers
 
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string message="")
         {
-            return View("ChangePassword", "_Layout",new ChangePasswordViewModel());
+            return View("ChangePassword", "_Layout",new ChangePasswordViewModel { OkMessage = message });
         }
 
         //
@@ -55,7 +55,7 @@ namespace SqlHealthMonitor.WEB.Controllers
                 {
                     await SignInAsync(user, isPersistent: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new { message = Resources.Global.Password + " " + Resources.Global.Changed2 });
             }
             AddErrors(result);
             return View("ChangePassword", "_Layout",model);
@@ -63,16 +63,9 @@ namespace SqlHealthMonitor.WEB.Controllers
 
         //
         // GET: /Account/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(string message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? Resources.Global.Yourpasswordhasbeenchanged
-                : message == ManageMessageId.SetPasswordSuccess ? Resources.Global.Yourpasswordhasbeenchanged
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two factor provider has been set."
-                : message == ManageMessageId.Error ? Resources.Global.Anerrorhasoccurred
-                : message == ManageMessageId.AddPhoneSuccess ? "The phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+           
 
             var model = new IndexViewModel
             {
@@ -82,7 +75,12 @@ namespace SqlHealthMonitor.WEB.Controllers
                 Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId()),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
             };
-            return View("Index", "_Layout",model);
+          
+            if (model.HasPassword)
+            return RedirectToAction("ChangePassword",new {message= message });
+           else
+            return RedirectToAction("SetPassword",new { message = message });
+
         }
 
       
@@ -135,9 +133,10 @@ namespace SqlHealthMonitor.WEB.Controllers
      
         //
         // GET: /Manage/SetPassword
-        public ActionResult SetPassword()
+        public ActionResult SetPassword(string message)
         {
-            return View("SetPassword", "_Layout",new SetPasswordViewModel());
+
+            return View("SetPassword", "_Layout",new SetPasswordViewModel { OkMessage = message });
         }
 
         //
@@ -156,7 +155,7 @@ namespace SqlHealthMonitor.WEB.Controllers
                     {
                         await SignInAsync(user, isPersistent: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("Index", new { message = Resources.Global.Password + " " + Resources.Global.Changed2 });
                 }
                 AddErrors(result);
             }

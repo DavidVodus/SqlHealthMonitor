@@ -133,6 +133,42 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Změnit.
+        /// </summary>
+        public static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to změněn.
+        /// </summary>
+        public static string Changed {
+            get {
+                return ResourceManager.GetString("Changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změněno.
+        /// </summary>
+        public static string Changed2 {
+            get {
+                return ResourceManager.GetString("Changed2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Změnit heslo.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opravdu si přejete smazat tuto Roli?.
         /// </summary>
         public static string ConfirmOfDeleteRole {
@@ -178,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ovládací Panel.
+        /// </summary>
+        public static string ControlPanel {
+            get {
+                return ResourceManager.GetString("ControlPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vytvořit.
         /// </summary>
         public static string Create {
@@ -192,6 +237,15 @@ namespace Resources {
         public static string Createanewaccount {
             get {
                 return ResourceManager.GetString("Createanewaccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vytvořen.
+        /// </summary>
+        public static string Created {
+            get {
+                return ResourceManager.GetString("Created", resourceCulture);
             }
         }
         
@@ -255,6 +309,15 @@ namespace Resources {
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smazán.
+        /// </summary>
+        public static string Deleted {
+            get {
+                return ResourceManager.GetString("Deleted", resourceCulture);
             }
         }
         
@@ -331,6 +394,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pro.
+        /// </summary>
+        public static string For {
+            get {
+                return ResourceManager.GetString("For", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cizí účty.
+        /// </summary>
+        public static string ForeignAccounts {
+            get {
+                return ResourceManager.GetString("ForeignAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nastavit attributy stránky.
         /// </summary>
         public static string Gotopagesettings {
@@ -345,6 +426,15 @@ namespace Resources {
         public static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Domů.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
@@ -421,6 +511,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Správa účtů.
+        /// </summary>
+        public static string ManageAccounts {
+            get {
+                return ResourceManager.GetString("ManageAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Správa ostatních uživatelů&lt;br&gt;
         ///Admin nastavení.
         /// </summary>
@@ -440,20 +539,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Správa mého účtu.
-        /// </summary>
-        public static string Manageyouraccount {
-            get {
-                return ResourceManager.GetString("Manageyouraccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Minuty.
         /// </summary>
         public static string Minutes {
             get {
                 return ResourceManager.GetString("Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Můj účet.
+        /// </summary>
+        public static string MyAccount {
+            get {
+                return ResourceManager.GetString("MyAccount", resourceCulture);
             }
         }
         
@@ -584,15 +683,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Změnit heslo.
-        /// </summary>
-        public static string Resetpassword {
-            get {
-                return ResourceManager.GetString("Resetpassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Potvrzení o změně hesla.
         /// </summary>
         public static string ResetpasswordConfirmation {
@@ -674,6 +764,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nastavit Heslo.
+        /// </summary>
+        public static string SetPassword {
+            get {
+                return ResourceManager.GetString("SetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nastavení.
         /// </summary>
         public static string Settings {
@@ -683,11 +782,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seznam Sql serverů.
+        /// </summary>
+        public static string SqlServersGrid {
+            get {
+                return ResourceManager.GetString("SqlServersGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Spustit.
         /// </summary>
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Povedlo se to.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabulka Sql serverů.
+        /// </summary>
+        public static string TableofSqlServers {
+            get {
+                return ResourceManager.GetString("TableofSqlServers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabulka Widgetů.
+        /// </summary>
+        public static string TableofWidgets {
+            get {
+                return ResourceManager.GetString("TableofWidgets", resourceCulture);
             }
         }
         
@@ -715,6 +850,15 @@ namespace Resources {
         public static string Tools {
             get {
                 return ResourceManager.GetString("Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fomulář není validní!.
+        /// </summary>
+        public static string UnvalidForm {
+            get {
+                return ResourceManager.GetString("UnvalidForm", resourceCulture);
             }
         }
         
@@ -769,6 +913,15 @@ namespace Resources {
         public static string Views {
             get {
                 return ResourceManager.GetString("Views", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seznam Widgetů.
+        /// </summary>
+        public static string WidgetGrid {
+            get {
+                return ResourceManager.GetString("WidgetGrid", resourceCulture);
             }
         }
         

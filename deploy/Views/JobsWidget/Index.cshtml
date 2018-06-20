@@ -1,0 +1,61 @@
+﻿@model SqlHealthMonitor.BLL.Models.WebPages.JobsPageViewModel
+@Styles.Render("~/Content/jtable/css")
+@Scripts.Render("~/bundles/jtable")
+<div id="sqlJobsTable_@Model.Widget.WidgetId.ToString()"></div>
+
+<script>
+    $(document).ready(function () {
+        (function (sqlHealthMonitor, $, undefined) {
+            $('#sqlJobsTable_@Model.Widget.WidgetId.ToString()').jtable({
+
+                jqueryuiTheme:true,
+                title: '@Model.Widget.Name',
+                actions: {
+                    listAction: '@Url.Action("Read","JobsWidget",new { SqlServerDataId=Model.Widget.SqlServerDataId })',
+                },
+                fields: {
+                    Jobname: {
+                  title: 'Job name',
+                        //width: '5%'
+                    },
+                    LastRunDateTime: {
+                        title: 'LastRunDateTime',
+                        display: function (data) {
+                            return new Date(data.record.LastRunDateTime);
+
+                        }
+                    },
+                    LastRunStatus: {
+                        title: 'LastRunStatus',
+                        //width: '5%'
+                    },
+                    LastRunDuration: {
+                        title: 'LastRunDuration',
+                        //display: function (data) {
+                        //    return new Date(data.record.LastRunDuration);
+
+                        //}
+                    },
+                    LastRunStatusMessage: {
+                        title: 'LastRunStatusMessage',
+                        //width: '5%'
+                    },
+                    NextRunDateTime: {
+                        title: 'NextRunDateTime',
+                        display: function (data) {
+                            return new Date(data.record.NextRunDateTime);
+
+                        }
+                    },
+
+                }
+            });
+
+            $.hik.jtable.prototype._showError = function (message) {
+              sqlHealthMonitor.showErrorDialog(message);
+            };
+            $('#sqlJobsTable_@Model.Widget.WidgetId.ToString()').jtable('load');
+
+    }(window.sqlHealthMonitor = window.sqlHealthMonitor || {}, jQuery));
+    })
+</script>
