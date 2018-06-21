@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using SqlHealthMonitor.BLL.Models;
+using SqlHealthMonitor.DAL.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,102 +12,33 @@ namespace SqlHealthMonitor.BLL.Services
 {
     public class JobsService : ServiceBase, IJobsService
     {
-        public class Jobs
-        {
-            public string Jobname { get; set; }
-            public string LastRunStatus { get; set; }
-            public string LastRunStatusMessage { get; set; }
-            public DateTime? LastRunDateTime { get; set; }
-            public String LastRunDuration { get; set; }
-            public DateTime? NextRunDateTime { get; set; }
-        
-        }
+       
 
-        public static string sqlJobs = @"SELECT 
-    [sJOB].[job_id] AS [JobID]
-    , [sJOB].[name] AS [JobName]
-    , CASE 
-        WHEN [sJOBH].[run_date] IS NULL OR [sJOBH].[run_time] IS NULL THEN NULL
-        ELSE CAST(
-                CAST([sJOBH].[run_date] AS CHAR(8))
-                + ' ' 
-                + STUFF(
-                    STUFF(RIGHT('000000' + CAST([sJOBH].[run_time] AS VARCHAR(6)),  6)
-                        , 3, 0, ':')
-                    , 6, 0, ':')
-                AS DATETIME)
-      END AS [LastRunDateTime]
-    , CASE [sJOBH].[run_status]
-        WHEN 0 THEN 'Failed'
-        WHEN 1 THEN 'Succeeded'
-        WHEN 2 THEN 'Retry'
-        WHEN 3 THEN 'Canceled'
-        WHEN 4 THEN 'Running' -- In Progress
-      END AS [LastRunStatus]
-    , STUFF(
-            STUFF(RIGHT('000000' + CAST([sJOBH].[run_duration] AS VARCHAR(6)),  6)
-                , 3, 0, ':')
-            , 6, 0, ':') 
-        AS [LastRunDuration]
-    , [sJOBH].[message] AS [LastRunStatusMessage]
-    , CASE [sJOBSCH].[NextRunDate]
-        WHEN 0 THEN NULL
-        ELSE CAST(
-                CAST([sJOBSCH].[NextRunDate] AS CHAR(8))
-                + ' ' 
-                + STUFF(
-                    STUFF(RIGHT('000000' + CAST([sJOBSCH].[NextRunTime] AS VARCHAR(6)),  6)
-                        , 3, 0, ':')
-                    , 6, 0, ':')
-                AS DATETIME)
-      END AS [NextRunDateTime]
-FROM 
-    [msdb].[dbo].[sysjobs] AS [sJOB]
-    LEFT JOIN (
-                SELECT
-                    [job_id]
-                    , MIN([next_run_date]) AS [NextRunDate]
-                    , MIN([next_run_time]) AS [NextRunTime]
-                FROM [msdb].[dbo].[sysjobschedules]
-                GROUP BY [job_id]
-            ) AS [sJOBSCH]
-        ON [sJOB].[job_id] = [sJOBSCH].[job_id]
-    LEFT JOIN (
-                SELECT 
-                    [job_id]
-                    , [run_date]
-                    , [run_time]
-                    , [run_status]
-                    , [run_duration]
-                    , [message]
-                    , ROW_NUMBER() OVER (
-                                            PARTITION BY [job_id] 
-                                            ORDER BY [run_date] DESC, [run_time] DESC
-                      ) AS RowNumber
-                FROM [msdb].[dbo].[sysjobhistory]
-                WHERE [step_id] = 0
-            ) AS [sJOBH]
-        ON [sJOB].[job_id] = [sJOBH].[job_id]
-        AND [sJOBH].[RowNumber] = 1
-ORDER BY [JobName]";
+       
         private DbContext _dbContext;
-        private ISqlServerDataService _sqlServerDataService;
-        public JobsService(DbContext context, ISqlServerDataService sqlServerDataService)
+        private ISqlServerDataRepository _sqlServerDataRepository;
+        public JobsService(DbContext context, ISqlServerDataRepository sqlServerDataRepository)
         {
-            _sqlServerDataService = sqlServerDataService; ;
+            _sqlServerDataRepository = sqlServerDataRepository;
             _dbContext = context;
 
         }
-        public List<Jobs> GetJobs(int SqlServerDataId, string currentUserId)
+        public List<SqlJobsViewModel> Get(int sqlServerDataId, string currentUserId, string jtSorting)
         {
 
-            var sqlServer = _sqlServerDataService.Read
-                  (x => x.ApplicationUserId == currentUserId && x.SqlServerDataId == SqlServerDataId).SingleOrDefault();
+            var _config = new MapperConfiguration(cfg =>
+            {
 
-            var dbContext = new DbContext(sqlServer.ConnectionString);
+                cfg.CreateMissingTypeMaps = true;
+            });
 
-            var test = dbContext.Database.SqlQuery<Jobs>(sqlJobs);
-            return test.ToList<Jobs>();
+            var mapper = new Mapper(_config);
+
+            var sqlServer = _sqlServerDataRepository.GetQueryable().Where
+              (x => x.ApplicationUserId == currentUserId && x.SqlServerDataId == sqlServerDataId).SingleOrDefault();
+            IJobsDataSource source = new JobsDataSource(sqlServer.ConnectionString);
+            return mapper.DefaultContext.Mapper.Map<List<SqlJobsViewModel>>(source.Get(jtSorting));
+
         }
         protected override Type LogPrefix => GetType();
     }

@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="Attributes\Markers\CacheMeAttribute.cs" />
     <Compile Include="Helpers\PopulateDatabase.cs" />
+    <Compile Include="Models\CpuLoadViewModel.cs" />
     <Compile Include="Models\DatabasesSizeWidgetViewModel.cs" />
     <Compile Include="Models\Identity\AccountViewModels.cs" />
     <Compile Include="Models\Identity\AdminViewModels.cs" />
@@ -103,6 +104,8 @@
     <Compile Include="Models\Identity\UserLogin\ApplicationRolePageViewModel.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUserPageViewModel.cs" />
     <Compile Include="Models\LogViewModel.cs" />
+    <Compile Include="Models\SqlDatabaseSizeViewModel.cs" />
+    <Compile Include="Models\SqlJobsViewModel.cs" />
     <Compile Include="Models\WebPages\CpuPageViewModel.cs" />
     <Compile Include="Models\WebPages\CpuSettingsPageViewModel.cs" />
     <Compile Include="Models\CpuWidgetViewModel.cs" />

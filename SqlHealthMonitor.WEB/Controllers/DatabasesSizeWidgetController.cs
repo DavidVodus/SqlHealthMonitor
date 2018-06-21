@@ -40,14 +40,14 @@ namespace SqlHealthMonitor.WEB.Controllers
             return View(model);
         }
 
-        public ActionResult Read(int SqlServerDataId, List<int> DatabaseIds, string jtSorting = null)
+        public ActionResult Read(int sqlServerDataId, List<int> databaseIds, string jtSorting = null)
         {
            
             try
             {
 
                 var currentUserId = User.Identity.GetUserId();
-                return JsonHelper.JsonOk(_databasesService.GetDatabasesSize(SqlServerDataId, currentUserId, DatabaseIds,jtSorting));
+                return JsonHelper.JsonOk(_databasesService.Get(sqlServerDataId, currentUserId, databaseIds,jtSorting));
             }
             catch (Exception ex)
             {

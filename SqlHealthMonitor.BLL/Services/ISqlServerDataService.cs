@@ -9,12 +9,18 @@ namespace SqlHealthMonitor.BLL.Services
     public interface ISqlServerDataService
     {
       /// <summary>
-      /// 
+      /// Get SqlServerData and transform them to ViewModel
+      /// by using automapper
       /// </summary>
       /// <typeparam name="SqlServerDataViewModel"></typeparam>
       /// <param name="predicate"></param>
       /// <returns></returns>
         List<SqlServerDataViewModel> Read<SqlServerDataViewModel>(Expression<Func<SqlServerData, bool>> predicate);
+        /// <summary>
+        /// Get SqlServerData
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         List<SqlServerData> Read(Expression<Func<SqlServerData, bool>> predicate);
         /// <summary>
         /// Transform from VIewModel to EF entity,return ViewModel with new Id in Database

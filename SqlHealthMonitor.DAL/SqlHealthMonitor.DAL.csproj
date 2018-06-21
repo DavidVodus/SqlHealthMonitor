@@ -136,6 +136,7 @@
       <DependentUpon>201806071320388_datid.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseContext\Migrations\SqlHealthMonitorDbContext\Configuration.cs" />
+    <Compile Include="DatabaseContext\SqlHealthMonitorDbContextLocal.cs" />
     <Compile Include="DatabaseContext\SqlHealthMonitorDbContext.cs" />
     <Compile Include="Helpers\EntityFrameworkExtension.cs" />
     <Compile Include="Helpers\EntityModelBuilder.cs" />
@@ -145,12 +146,15 @@
     <Compile Include="Managers\ApplicationSignInManager.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />
     <Compile Include="Managers\DataBaseTypeAttribute.cs" />
+    <Compile Include="Models\CpuLoad.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationRole.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUser.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUserClaim.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUserLogin.cs" />
     <Compile Include="Models\Identity\UserLogin\ApplicationUserRole.cs" />
     <Compile Include="Models\Log.cs" />
+    <Compile Include="Models\SqlDatabaseSize.cs" />
+    <Compile Include="Models\SqlJobs.cs" />
     <Compile Include="Models\SqlServerData.cs" />
     <Compile Include="Models\WebPages\HomePage.cs" />
     <Compile Include="Models\WebPages\PageBase.cs" />
@@ -160,12 +164,18 @@
     <Compile Include="Models\Widgets\JobsWidget.cs" />
     <Compile Include="Models\Widgets\WidgetBase.cs" />
     <Compile Include="Repositories\ApplicationUser.cs" />
+    <Compile Include="Repositories\CpuDataSource.cs" />
+    <Compile Include="Repositories\DatabaseSizeDataSource.cs" />
     <Compile Include="Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Repositories\ICpuDataSource.cs" />
+    <Compile Include="Repositories\IDatabaseSizeDataSource.cs" />
+    <Compile Include="Repositories\IJobsDataSource.cs" />
     <Compile Include="Repositories\ILogRepository.cs" />
     <Compile Include="Repositories\IPageRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISqlServerDataRepository.cs" />
     <Compile Include="Repositories\IWidgetRepository.cs" />
+    <Compile Include="Repositories\JobsDataSource.cs" />
     <Compile Include="Repositories\LogRepository.cs" />
     <Compile Include="Repositories\PageRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />

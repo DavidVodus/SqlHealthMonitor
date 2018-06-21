@@ -1,14 +1,20 @@
 ﻿
 
+using SqlHealthMonitor.BLL.Models;
 using System.Collections.Generic;
 
 namespace SqlHealthMonitor.BLL.Services
 {
     public interface ICpuService
     {
-        /// Get data from Sql server,related to cpu load,and return JSON 
-        /// [{"SqlServer":0,"Others":1,"EventTime":"\/Date(1526887626807)\/","EventTimeText":"9:27"}]
-        /// six records is returned from Sql and each record contains time record of CPU load from now up to 6 minutes to the past
-        List< CpuService.CpuLoad> GetCpuUsage(int SqlServerDataId,string currentUserId,int NumberOfREcords);
+        /// <summary>
+        ///Get data from Sql server,related to cpu load of Sql server.
+        /// it uses CpuDataSource and SqlServerRepository
+        /// </summary>
+        /// <param name="sqlServerDataId">id of sql record where connectionString is stored</param>
+        /// <param name="currentUserId">logged user id</param>
+        /// <param name="numberOfREcords">each records represents cpu load in one minutes span </param>
+        /// <returns></returns>
+        List<CpuLoadViewModel> Get(int sqlServerDataId,string currentUserId,int numberOfREcords);
     }
 }

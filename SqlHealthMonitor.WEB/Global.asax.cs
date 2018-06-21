@@ -39,7 +39,7 @@ namespace SqlHealthMonitor
                 container.Register(Component.For<ICacheService>().ImplementedBy<CacheService>().LifestyleTransient());
                 container.Register(Component.For<CacheInterceptor>().LifestyleTransient());
               
-                container.Register(Component.For<DbContext>().ImplementedBy<SqlHealthMonitorDbContext>().LifestyleTransient());
+                container.Register(Component.For<DbContext>().ImplementedBy<SqlHealthMonitorDbContextLocal>().LifestyleTransient());
                 container.Register(Classes.FromAssemblyContaining<ServiceBase>().BasedOn<IService>()
                     .WithServiceDefaultInterfaces().LifestyleTransient().Configure(ConfigureInterceptors));
                 container.Register(Classes.FromAssemblyContaining(typeof(RepositoryBase<>))

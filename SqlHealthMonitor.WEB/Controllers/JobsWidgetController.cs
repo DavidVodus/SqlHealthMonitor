@@ -40,13 +40,13 @@ namespace SqlHealthMonitor.WEB.Controllers
             return View(model);
         }
 
-        public ActionResult Read(int SqlServerDataId)
+        public ActionResult Read(int sqlServerDataId,string jtSorting = null)
         {
             try
             {
 
                 var currentUserId = User.Identity.GetUserId();
-                return JsonHelper.JsonOk(_jobsService.GetJobs(SqlServerDataId, currentUserId));
+                return JsonHelper.JsonOk(_jobsService.Get(sqlServerDataId, currentUserId, jtSorting));
             }
             catch (Exception ex)
             {

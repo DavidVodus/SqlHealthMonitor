@@ -69,7 +69,7 @@ namespace SqlHealthMonitor.DAL.Repositories
             Data.Remove(entity);
         }
 
-        public IList<T> GetAll()
+        public virtual IList<T> GetAll()
         {
             return Data.ToList<T>();
         }

@@ -81,14 +81,14 @@ namespace SqlHealthMonitor.WEB.Controllers
         /// <summary>
         /// Get Sql records of CPU utilization and transform them into JSON
         /// </summary>
-        /// <param name="SqlServerDataId"></param>
+        /// <param name="sqlServerDataId"></param>
         /// <returns></returns>
-        public ContentResult Read(int SqlServerDataId,int NumberOfRecords)
+        public ContentResult Read(int sqlServerDataId,int NumberOfRecords)
         {
             try
             {
                 var currentUserId = User.Identity.GetUserId();
-                return JsonHelper.JsonOk(_cpuBaseService.GetCpuUsage(SqlServerDataId, currentUserId,NumberOfRecords));
+                return JsonHelper.JsonOk(_cpuBaseService.Get(sqlServerDataId, currentUserId,NumberOfRecords));
             }
             catch (Exception ex)
             {
